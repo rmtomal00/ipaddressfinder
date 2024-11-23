@@ -1,5 +1,5 @@
 To run the project first command:
-```npm install``
+```npm install```
 
 and start the server;
 ```node --watch bin/www```
