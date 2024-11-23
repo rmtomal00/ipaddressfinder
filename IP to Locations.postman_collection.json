@@ -1,0 +1,105 @@
+{
+	"info": {
+		"_postman_id": "2283ff06-5fad-4b57-874a-78cacd91b67a",
+		"name": "IP to Locations",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13557566"
+	},
+	"item": [
+		{
+			"name": "IP address to location",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/public/210.4.1.0",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"210.4.1.0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List of IPs",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list\": [\"100.2.15.2\",\"98.3.0.11\"] //list length can't be more then 100 and every ip should be an string\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/public/multi-ip",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"multi-ip"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Search with country code",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"list\": [10,0]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:3000/public//find-by-country-code?countryCode=bd&page=1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"public",
+						"",
+						"find-by-country-code"
+					],
+					"query": [
+						{
+							"key": "countryCode",
+							"value": "bd"
+						},
+						{
+							"key": "page",
+							"value": "1"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
