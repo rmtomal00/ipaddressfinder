@@ -36,7 +36,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"list\": [10,0]\n}",
+					"raw": "{\n    \"list\": ["100.2.10.2", "77.8.10.3"] //list length can't be more then 100 and every ip should be an string\n}",
 					"options": {
 						"raw": {
 							"language": "json"
