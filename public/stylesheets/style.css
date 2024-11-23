@@ -1,0 +1,178 @@
+.code-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  border-radius: 10px;
+  overflow-x: auto;
+}
+
+pre[class*="language-"] {
+  background-color: #000000; /* Dark background */  
+  padding: 3px;
+  display: flex;
+  justify-content: center;
+  border-radius: 8px;
+  width: max-content;
+  box-shadow: none;
+  text-shadow: none;
+}
+
+code[class*="language-"] {
+  padding: 10px;
+  box-shadow: none;
+  text-shadow: none;
+  font-size: 20px;
+}
+.token.cdata {
+  color: #6a9955; /* Green for comments */
+}
+.token.symbol {
+  color: #dcdcaa; /* Yellow for tags and properties */
+}
+
+.token.string {
+  color: #3ae72a; /* Red for strings */
+}
+.token.keyword {
+  color: #569cd6; /* Blue for keywords */
+}
+.token.boolean {
+  color: #569cd6; /* Blue for booleans */
+}
+.token.number {
+  color: #ffbc57; /* Light green for numbers */
+}
+.main-container-body{
+  padding: 3%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.header{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+}
+.start-page-header-banner{
+  color: #6a9955;
+  font-size: 45px;
+  font-weight: bolder;
+  padding: 0px;
+  margin: 0px;
+}
+.sub-heading{
+  color: #2b2b2b;
+  margin: 0px;
+  padding: 0px;
+  font-size: 18px;
+}
+.user-ip-withlocation{
+  margin-top: 40px;
+  display: grid;
+  gap: 2px;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+.user-ip{
+  font-weight: bolder;
+  margin: 0%;
+  padding: 0%;
+  font-size: 30px;
+  color: #569cd6;
+}
+.body{
+  padding: 4%;
+}
+
+.donation-first-page{
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.form{
+  display: grid;
+  width: 40%;
+  border-radius: 10px;
+  padding: 15px;
+  background-color: #ccd0d4;
+}
+
+.email{
+  color: rgb(89, 89, 245);
+  padding: 0px;
+  margin: 0px;
+}
+.amount{
+
+  color: rgb(89, 89, 245);
+  padding: 0px;
+  margin: 10px 0px 0px 0px;
+}
+
+.button{
+  border-radius: 10px;
+  padding: 5px;
+  margin: 18px 0px 0px 0px;
+  border: 0px;
+  color: #ffffff;
+  background-color: #6a9955;
+}
+.button:hover{
+  background-color: #325820;
+}
+.donete-us{
+  color: rgb(245, 159, 0);
+  font-weight: bolder;
+}
+
+.error-container{
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.error{
+  display: none;
+  margin: 10px 0px 0px 0px;
+  color: red;
+}
+
+.payment-link{
+  margin: 0px 0px 0px 3px;
+  padding: 4px 0px 4px 0px;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+
+.list{
+  margin: 0px 0px 0px 0px;
+  display: flex;
+  flex-direction: row;
+}
+.link-name{
+  margin: Opx 0px 0px 0px;
+  padding: Opx 0px 0px 0px;
+}
+
+@media screen and (max-width: 767px){
+  .form{
+    display: grid;
+    width: 95%;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #ccd0d4;
+  }
+  code[class*="language-"] {
+    padding: 10px;
+    box-shadow: none;
+    text-shadow: none;
+    font-size: 12px;
+  }
+}
