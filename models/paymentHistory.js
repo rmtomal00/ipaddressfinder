@@ -10,7 +10,7 @@ const PaymentHistory = sequelize.define("paymenthistory", {
         primaryKey: true,
     },
     email:{
-        type: Sequelize.INTEGER,
+        type: Sequelize.STRING(250),
         allowNull: false
     },
     amount:{

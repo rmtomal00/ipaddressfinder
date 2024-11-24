@@ -20,7 +20,7 @@ class BinanceGateway{
         const sign = await this.#generateHamc(time+"\n"+nonce+"\n"+JSON.stringify(userData)+"\n")
         //console.log(sign);
         try {
-            const data = await axios.post(baseUrl+"/binancepay/openapi/v3/order",
+            const gateWayDataRes = await axios.post(baseUrl+"/binancepay/openapi/v3/order",
                 userData,
                 {
                     headers:{
@@ -31,8 +31,8 @@ class BinanceGateway{
                     }
                 }
             )
-            const resData = data.data.data
-            console.log(resData);
+            const resData = gateWayDataRes.data.data
+            console.log(gateWayDataRes.data);
             const insertData = await BinancePending.create({
                 merchantTradeNo: userData.merchantTradeNo,
                 prepayId: resData.prepayId,
@@ -58,7 +58,7 @@ class BinanceGateway{
         const sign = await this.#generateHamc(time+"\n"+nonce+"\n"+JSON.stringify(userData)+"\n")
         //console.log(sign);
         try {
-            const data = await axios.post(baseUrl+"/binancepay/openapi/v2/order/query",
+            const getWayRes = await axios.post(baseUrl+"/binancepay/openapi/v2/order/query",
                 userData,
                 {
                     headers:{
@@ -69,10 +69,8 @@ class BinanceGateway{
                     }
                 }
             )
-            const resData = data.data.data
-            console.log(resData.paymentInfo);
-            const plan = resData.orderAmount === 8 ? "platinum": 'gold';
-            console.log(plan);
+            const resData = getWayRes.data.data
+            //console.log(getWayRes.data);
 
             if(resData.status === "PAID"){
                 await PaymentHistory.create({
@@ -80,7 +78,6 @@ class BinanceGateway{
                     payId: resData.merchantTradeNo,
                     amount: resData.orderAmount,
                     gatewayname: "Binance",
-                    plan: plan
                 })
             }
             return resData

@@ -9,4 +9,16 @@ router.get('/', function(req, res, next) {
   res.render('index', { ip: setIp });
 });
 
+router.get("/api-docs", async (req,res)=>{
+  res.render('apidocs');
+})
+
+router.get('/privacy-policy', async (req, res)=>{
+  res.render('privacy');
+})
+
+router.get('/contact-us', async (req, res)=>{
+  res.render("contact")
+})
+
 module.exports = router;

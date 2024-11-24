@@ -8,8 +8,10 @@ const cors = require("cors")
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const publicControllerEnd = require('./controllers/publicController');
+const BinancePaymentStatus = require("./scheduler/binancePaymentCheck");
 
 var app = express();
+const binancePayment = new BinancePaymentStatus()
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,7 +25,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+// app.use('/users', usersRouter);
 app.use('/public', publicControllerEnd);
 
 // catch 404 and forward to error handler
@@ -41,5 +43,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+
+binancePayment.startCron();
 
 module.exports = app;
