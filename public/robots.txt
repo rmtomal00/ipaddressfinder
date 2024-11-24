@@ -1,0 +1,8 @@
+# robots.txt for https://ip.team71.link/
+
+User-agent: *
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /admin/
+
+Sitemap: https://ip.team71.link/sitemap.xml

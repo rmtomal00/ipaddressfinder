@@ -1,0 +1,19 @@
+.maincontainr{
+    padding: 5%;
+    flex: 1;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    height: 100vh; /* Full height of the viewport */
+    display: flex;
+    flex-direction: column;
+}
+
+.buttom-footer{
+    align-self: flex-end;
+    position: sticky;
+    bottom: 0px;
+    width: 100%;
+}

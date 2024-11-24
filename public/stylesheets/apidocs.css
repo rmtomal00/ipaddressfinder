@@ -1,0 +1,74 @@
+body{
+    margin: 0px;
+    padding: 0px;
+}
+
+.code-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    border-radius: 10px;
+    overflow-x: auto;
+  }
+  
+  pre[class*="language-"] {
+    background-color: #f3eded; /* Dark background */  
+    padding: 3px;
+    display: flex;
+    justify-content: center;
+    border-radius: 8px;
+    width: max-content;
+    box-shadow: none;
+    text-shadow: none;
+  }
+  
+  code[class*="language-"] {
+    padding: 10px;
+    box-shadow: none;
+    text-shadow: none;
+    font-size: 13px;
+  }
+  .token.cdata {
+    color: #6a9955; /* Green for comments */
+  }
+  .token.symbol {
+    color: #dcdcaa; /* Yellow for tags and properties */
+  }
+  
+  .token.string {
+    color: #3ae72a; /* Red for strings */
+  }
+  .token.keyword {
+    color: #569cd6; /* Blue for keywords */
+  }
+  .token.boolean {
+    color: #569cd6; /* Blue for booleans */
+  }
+  .token.number {
+    color: #ffbc57; /* Light green for numbers */
+  }
+  .token.variable {
+    color: #FF5733 !important;
+  }
+  .token.constant {
+    color: #00BFFF; /* Sky blue for constants */
+  }
+
+.main-container{
+    padding: 3% 3% 3% 3% ;
+}
+.header{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.title{
+    text-align: center;
+    border-bottom: darkcyan dotted;
+    font-weight: bolder;
+    color: #1da511;
+}
+.base-url{
+    display: flex;
+    flex-direction: row;
+}
