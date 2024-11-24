@@ -128,7 +128,7 @@
       const Ip = document.getElementById("ip")
       const setUpResponeId = document.getElementById("dataset")
       const ip_address = Ip.textContent
-      fetch(`https://ip.team71.link/public/${ip_address}`)
+      fetch(`https://ip.team71.link/public/get-my-ip-data`)
       .then(res => res.json())
       .then((result)=>{
         if (result.error) {
@@ -145,6 +145,7 @@
             "city_name": resData["city_name"],
             "timezone": resData["timezone"]
           }
+          Ip.textContent = resData.ip;
           setUpResponeId.textContent = JSON.stringify(updateData, null, 2)
         }
         console.log(result);

@@ -5,11 +5,13 @@ const ResponseDataModel = require("../response_model/response_data_model");
 const {Op} = require("sequelize");
 const CreteUID = require("../payment/cryptoUtilty");
 const BinanceGateway = require("../payment/Payment");
+const IpService = require("../service/ipservice");
 
 
 const ResponseModel = new ResponseDataModel();
 const createUid = new CreteUID();
 const binance = new BinanceGateway();
+const ip_service = new IpService();
 
 publicController.all("/multi-ip", async (req, res) => {
     try{
@@ -124,6 +126,24 @@ publicController.all("/find-by-country-code", async (req, res) => {
     }
 })
 
+publicController.all('/get-my-ip-data', async (req, res) => {
+    try{
+        const userIP = req.headers['x-forwarded-for'];
+        if (!userIP){
+            return ResponseModel.errorRes(res, 400, "ip not found");
+        }
+        if (ip.isPrivate(userIP)) {
+            return ResponseModel.errorRes(res, 400, "Your IP is a private IP");
+        }
+        const ipData = await ip_service.ipDetailsGet(userIP);
+
+        ResponseModel.successWithData(res, ipData, "Successfully found IP details");
+    }catch (e) {
+        console.log(e)
+        ResponseModel.serverErrorRes(res, e.message)
+    }
+})
+
 publicController.post("/get-payment-link", async (req, res)=>{
     try {
         const {email, amount} = req.body;
@@ -135,7 +155,7 @@ publicController.post("/get-payment-link", async (req, res)=>{
         }
 
         const userId = email;
-        const plan = amount === 8 ? 'platinum':'gold';
+
         const data = {
             "env": {
                 "terminalType": "APP"
@@ -151,7 +171,7 @@ publicController.post("/get-payment-link", async (req, res)=>{
                 "goodsType": "02",
                 "goodsCategory": "Online subscription",
                 "referenceGoodsId": createUid.createUid(5),
-                "goodsName": plan,
+                "goodsName": "Donation",
                 "goodsDetail": "Subscription"
             }]
         }
@@ -178,31 +198,9 @@ publicController.all('/:userip', async (req, res) => {
         if (ip.isPrivate(userip)) {
             return ResponseModel.errorRes(res, 400, "Your IP is a private IP");
         }
-        const data = await IpDetailsModel.findOne(
-            {
-                where: {
-                    ip_from: {[Op.lte]: ip.toLong(String(userip).trim())}
-                },
-                limit: 1,
-                raw: true,
-                order: [['ip_from', 'DESC']]
 
-            }
-        )
-        if (!data){
-            return ResponseModel.errorRes(res, 400, "IP not found");
-        }
-        const pData ={
-            ip_from: ip.fromLong(data.ip_from),
-            ip_to: ip.fromLong(data.ip_to),
-            ip: userip,
-            country_code: data.country_code,
-            country: data.country,
-            region_name: data.region_name,
-            city_name: data.city_name,
-            timezone: data.time_zone,
-            original: "This database from IP2LOCATION, Donate us to improve this service and get the paid version"
-        }
+        const pData = await ip_service.ipDetailsGet(userip);
+
         ResponseModel.successWithData(res, pData, 'Successfully found IP details');
     }catch(e){
         console.error(e);
