@@ -5,7 +5,8 @@ var router = express.Router();
 router.get('/', function(req, res, next) {
   const ip = req.socket.remoteAddress;
   
-  const setIp = !ip ?  "IP Not found" : ip.split(':').pop()
+  const setIp = req.headers['x-forwarded-for'];
+  console.log(req.headers['x-forwarded-for']);
   res.render('index', { ip: setIp });
 });
 

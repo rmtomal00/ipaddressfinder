@@ -13,7 +13,7 @@ body {
 
 .buttom-footer{
     align-self: flex-end;
-    position: sticky;
+    position: absolute;
     bottom: 0px;
     width: 100%;
 }
