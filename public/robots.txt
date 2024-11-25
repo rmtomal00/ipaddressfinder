@@ -4,5 +4,6 @@ User-agent: *
 Disallow: /private/
 Disallow: /tmp/
 Disallow: /admin/
+Disallow: https://srv.team71.link
 
 Sitemap: https://ip.team71.link/sitemap.xml
