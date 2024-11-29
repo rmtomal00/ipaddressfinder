@@ -2,6 +2,7 @@
 
 User-agent: *
 Disallow: /private/
+Disallow: /public
 Disallow: /tmp/
 Disallow: /admin/
 Disallow: https://srv.team71.link
