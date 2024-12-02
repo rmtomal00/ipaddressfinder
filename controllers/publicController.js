@@ -69,10 +69,11 @@ publicController.all("/multi-ip", async (req, res) => {
 
 publicController.all("/find-by-country-code", async (req, res) => {
     try{
-        var {countryCode, page, uid} = req.query;
+        var {countryCode, page} = req.query;
         if (!countryCode || countryCode.length > 2){
             return ResponseModel.errorRes(res, 400, "country_code can't be empty or null and not greater then 2")
         }
+        countryCode = String(countryCode).trim().toLocaleUpperCase();
         const total_page = await IpDetailsModel.count({
             where: {
                 country_code: countryCode,
@@ -86,16 +87,20 @@ publicController.all("/find-by-country-code", async (req, res) => {
             return ResponseModel.errorRes(res, 400, "page not found");
         }
 
+        const ids = await IpDetailsModel.findAll({
+            attributes: ['id'],
+            where: { country_code:  countryCode},
+            offset: (1000 * (page - 1)),
+            limit: 1000,
+            raw: true
+        });
+
+        // Extract the IDs from the subquery result
+        const idList = ids.map(item => item.id);
+
+        // Step 2: Fetch all columns for the matched IDs
         const allData = await IpDetailsModel.findAll({
-            where: {
-                [Op.and]: [
-                    { country_code: String(countryCode).trim().toUpperCase() },
-                ],
-            },
-            offset: (page - 1) * 1000, // Offset for pagination
-            limit: 1000, // Number of rows to fetch
-            raw: true,
-            order: [["id", "ASC"]], // Order by ascending ID
+            where: { id: { [Op.in]: idList } }
         });
         if (!allData || allData.length < 1){
             return ResponseModel.errorRes(res, 400, "page not found");
